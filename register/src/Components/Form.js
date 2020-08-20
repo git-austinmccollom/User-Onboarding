@@ -28,7 +28,7 @@ export default function Form(props) {
     }
 
     const onChecked = evt => {
-        if (evt.target.value = 'false') {
+        if (evt.target.value === 'false') {
             const value = 'true'
             const name = evt.target.name
             setFormValues({ ...formValues, [name]: value })
