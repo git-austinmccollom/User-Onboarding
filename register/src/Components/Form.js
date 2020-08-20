@@ -19,14 +19,21 @@ const FormBox = styled.form`
 
 export default function Form(props) {
 
-    const {formValues} = props
+    const {formValues, setFormValues, submitForm} = props
     
     const onInputChange = evt => {
+        const name = evt.target.name
+        const value = evt.target.value
+        setFormValues({ ...formValues, [name]: value })
+    }
 
+    const onSubmit = evt => {
+        evt.preventDefault()
+        submitForm()
     }
 
     return (
-        <FormBox>
+        <FormBox onSubmit={onSubmit}>
             <h1>Sign Up</h1>
             <label>Name:
                 <input
@@ -34,6 +41,7 @@ export default function Form(props) {
                    type='text'
                    placeholder='Name'
                    value={formValues.name}
+                   onChange={onInputChange}
                 /> 
             </label>
             <label>Email:
@@ -56,10 +64,12 @@ export default function Form(props) {
             </label>
             <label>Do you agree to the Terms of Service?:
                 <input
+                   id='terms'
                    name='email'
                    type='checkbox'
                 /> 
             </label>
+            <button>submit</button>
         </FormBox>
     )
 }
