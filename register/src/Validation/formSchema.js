@@ -9,7 +9,7 @@ const formSchema = yup.object().shape({
         .email()
         .required('Must include your email'),
     password: yup
-        .string()
+        .string().min(10)
         .required('Must include a password'),
     terms: yup
         .bool()

@@ -2,11 +2,12 @@ import React, { useState, useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Form from './Components/Form'
+import User from './Components/User'
 import styled from 'styled-components'
 import formSchema from './Validation/formSchema'
 import axios from 'axios'
 import * as yup from 'yup'
-// import uuid from 'uuid'
+// import uuid from 'react-uuid'
 
 const initialFormValues = {
   name: '',
@@ -24,6 +25,7 @@ const initialErrorValues = {
 
 function App() {
 
+  const [ users, setUsers ] = useState([])
   const [ formValues, setFormValues ] = useState(initialFormValues);
   const [ disabled, setDisabled ] = useState(true);
   const [ errors, setErrors ] = useState(initialErrorValues);
@@ -63,17 +65,34 @@ function App() {
 
   const submitForm = evt => {
     const user = {
-      // id: uuid(),
       name: formValues.name.trim(),
       email: formValues.email.trim(),
       password: formValues.password.trim(),
     }
-    console.log(user)
+    postNewUser(user)
+  }
+
+  const postNewUser = user => {
+    axios.post('https://reqres.in/api/users', user)
+      .then(res => {
+        setUsers([...users, res.data])
+      })
+      .catch(err => {
+        debugger
+      })
+      .finally(() => {
+        setFormValues(initialFormValues)
+      })
   }
 
   return (
     <div className="App">
       <Form formValues={formValues} setFormValues={setFormValues} changeFormValues={changeFormValues} submitForm={submitForm} disabled={disabled} errors={errors}/>
+      {
+        users.map( usr => {
+          return <User key={Math.random * Math.Random * 100} user={usr}/>
+        })
+      }
     </div>
   );
 }

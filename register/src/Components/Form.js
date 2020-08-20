@@ -60,7 +60,7 @@ export default function Form(props) {
             <div className="innerForm">
                 <h1>Sign Up</h1>
                 <div className='inlineDiv'>
-                    <div>{errors.name}</div>
+                    <div className="errorDiv">{errors.name}</div>
                     <label>Name:
                         <input
                         name='name'
@@ -84,7 +84,7 @@ export default function Form(props) {
                     </label>
                 </div>
                 <div className='inlineDiv'>
-                    <div>{errors.password}</div>
+                    <div className="errorDiv">{errors.password}</div>
                     <label>Password:
                         <input
                         name='password'
@@ -96,7 +96,7 @@ export default function Form(props) {
                     </label>
                 </div>
                 <div className='inlineDiv'>
-                    <div>{errors.terms}</div>
+                    <div className="errorDiv">{errors.terms}</div>
                     <label>Do you agree to the Terms of Service?:
                         <input
                         id='terms'
