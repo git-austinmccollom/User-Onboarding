@@ -6,12 +6,13 @@ import styled from 'styled-components'
 import formSchema from './Validation/formSchema'
 import axios from 'axios'
 import * as yup from 'yup'
-import uuid from 'uuid'
+// import uuid from 'uuid'
 
 const initialFormValues = {
   name: '',
   email: '',
   password: '',
+  // terms: false
 }
 
 function App() {
@@ -29,7 +30,7 @@ function App() {
 
   const submitForm = evt => {
     const user = {
-      id: uuid(),
+      // id: uuid(),
       name: formValues.name.trim(),
       email: formValues.email.trim(),
       password: formValues.password.trim(),

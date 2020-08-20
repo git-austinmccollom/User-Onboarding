@@ -10,7 +10,10 @@ const formSchema = yup.object().shape({
         .required('Must include your email'),
     password: yup
         .string()
-        .required('Must include a password')
+        .required('Must include a password'),
+    terms: yup
+        .bool()
+        .required('You must agree to our Terms of Service before we register your account')
 })
 
 export default formSchema

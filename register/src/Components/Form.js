@@ -19,7 +19,7 @@ const FormBox = styled.form`
 
 export default function Form(props) {
 
-    const {formValues, setFormValues, submitForm} = props
+    const {formValues, setFormValues, submitForm, disabled} = props
     
     const onInputChange = evt => {
         const name = evt.target.name
@@ -65,11 +65,11 @@ export default function Form(props) {
             <label>Do you agree to the Terms of Service?:
                 <input
                    id='terms'
-                   name='email'
+                   name='terms'
                    type='checkbox'
                 /> 
             </label>
-            <button>submit</button>
+            <button disabled={disabled}>submit</button>
         </FormBox>
     )
 }
