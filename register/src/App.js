@@ -12,7 +12,7 @@ const initialFormValues = {
   name: '',
   email: '',
   password: '',
-  // terms: false
+  terms: 'false'
 }
 
 function App() {
@@ -23,7 +23,6 @@ function App() {
   useEffect(() => {
     formSchema.isValid(formValues)
       .then(valid => {
-        console.log(valid)
         setDisabled(!valid);
       })
   }, [formValues])
@@ -35,6 +34,7 @@ function App() {
       email: formValues.email.trim(),
       password: formValues.password.trim(),
     }
+    console.log(user)
   }
 
   return (

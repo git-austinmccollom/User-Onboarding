@@ -22,9 +22,21 @@ export default function Form(props) {
     const {formValues, setFormValues, submitForm, disabled} = props
     
     const onInputChange = evt => {
-        const name = evt.target.name
         const value = evt.target.value
+        const name = evt.target.name
         setFormValues({ ...formValues, [name]: value })
+    }
+
+    const onChecked = evt => {
+        if (evt.target.value = 'false') {
+            const value = 'true'
+            const name = evt.target.name
+            setFormValues({ ...formValues, [name]: value })
+        } else {
+            const value = 'false'
+            const name = evt.target.name
+            setFormValues({ ...formValues, [name]: value })
+        }
     }
 
     const onSubmit = evt => {
@@ -67,6 +79,8 @@ export default function Form(props) {
                    id='terms'
                    name='terms'
                    type='checkbox'
+                   value={formValues.terms}
+                   onClick={onChecked}
                 /> 
             </label>
             <button disabled={disabled}>submit</button>
