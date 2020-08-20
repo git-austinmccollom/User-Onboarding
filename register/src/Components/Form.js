@@ -7,24 +7,35 @@ const FormBox = styled.form`
     border: 2px solid black;
     border-radius: 5px;
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-direction: row;
+    justify-content: center;
     label {
         margin: 5px 0;
     }
     input {
         margin: 0 5px;
     }
+    .innerForm {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .errorDiv {
+        color: red;
+    }
+    .inlineDiv {
+        display: flex;
+    }
 `
 
 export default function Form(props) {
 
-    const {formValues, setFormValues, submitForm, disabled} = props
+    const {formValues, setFormValues, changeFormValues, submitForm, disabled, errors} = props
     
     const onInputChange = evt => {
         const value = evt.target.value
         const name = evt.target.name
-        setFormValues({ ...formValues, [name]: value })
+        changeFormValues(name, value)
     }
 
     const onChecked = evt => {
@@ -46,44 +57,58 @@ export default function Form(props) {
 
     return (
         <FormBox onSubmit={onSubmit}>
-            <h1>Sign Up</h1>
-            <label>Name:
-                <input
-                   name='name'
-                   type='text'
-                   placeholder='Name'
-                   value={formValues.name}
-                   onChange={onInputChange}
-                /> 
-            </label>
-            <label>Email:
-                <input
-                   name='email'
-                   type='email'
-                   placeholder='Email'
-                   value={formValues.email}
-                   onChange={onInputChange}
-                /> 
-            </label>
-            <label>Password:
-                <input
-                   name='password'
-                   type='password'
-                   placeholder='Password'
-                   value={formValues.password}
-                   onChange={onInputChange}
-                /> 
-            </label>
-            <label>Do you agree to the Terms of Service?:
-                <input
-                   id='terms'
-                   name='terms'
-                   type='checkbox'
-                   value={formValues.terms}
-                   onClick={onChecked}
-                /> 
-            </label>
-            <button disabled={disabled}>submit</button>
+            <div className="innerForm">
+                <h1>Sign Up</h1>
+                <div className='inlineDiv'>
+                    <div>{errors.name}</div>
+                    <label>Name:
+                        <input
+                        name='name'
+                        type='text'
+                        placeholder='Name'
+                        value={formValues.name}
+                        onChange={onInputChange}
+                        /> 
+                    </label>
+                </div>
+                <div className='inlineDiv'>
+                    <div className="errorDiv">{errors.email}</div>
+                    <label>Email:
+                        <input
+                        name='email'
+                        type='email'
+                        placeholder='Email'
+                        value={formValues.email}
+                        onChange={onInputChange}
+                        /> 
+                    </label>
+                </div>
+                <div className='inlineDiv'>
+                    <div>{errors.password}</div>
+                    <label>Password:
+                        <input
+                        name='password'
+                        type='password'
+                        placeholder='Password'
+                        value={formValues.password}
+                        onChange={onInputChange}
+                        /> 
+                    </label>
+                </div>
+                <div className='inlineDiv'>
+                    <div>{errors.terms}</div>
+                    <label>Do you agree to the Terms of Service?:
+                        <input
+                        id='terms'
+                        name='terms'
+                        type='checkbox'
+                        value={formValues.terms}
+                        onClick={onChecked}
+                        /> 
+                    </label>
+                </div>
+                <button disabled={disabled}>submit</button>
+            </div>
         </FormBox>
     )
 }
